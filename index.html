@@ -58,7 +58,17 @@
  			e.target.innerHTML = currentTurn;
  			// Player switch
  			currentTurn = currentTurn === PlayerOne ? PlayerTwo : PlayerOne;
+ 			checkWinner()
  		})
+        
+        // Transform the squares into a 1x9 array
+ 		function checkWinner(){
+ 			var squares = Array.prototype.slice.call(document.querySelectorAll('.square'),0)
+ 			var symbols = squares.map(function(square){
+ 				return square.innerHTML
+ 			})
+ 			console.log(symbols);
+ 		}
  		</script>
  	</body>
  </html>
