@@ -10,7 +10,7 @@
  	  	flex-wrap: wrap;
  	  	justify-content: flex-start;
 
-  }
+       }
  	  	.square {
  	  		height: 200px;
  	  		width: 200px;
@@ -21,7 +21,7 @@
  	  		display: flex;
  	  		justify-content: center;
  	  		align-items: center;
-
+            
  	  	}
 
  	  	.square:hover {
@@ -34,38 +34,67 @@
  	<body>
  		<h1> First React app </h1>
  		<!--Tic Tac Toe board-->
- 		<div class="board">
-         <div class="square"></div>
-         <div class="square"></div>
-         <div class="square"></div>
-
-         <div class="square"></div>
+ 		<div class="render-target">
+        <!-- <div class="square"></div>
          <div class="square"></div>
          <div class="square"></div>
 
          <div class="square"></div>
          <div class="square"></div>
          <div class="square"></div>
+
+         <div class="square"></div>
+         <div class="square"></div>
+         <div class="square"></div>-->
  		</div>
 
  		<script>
- 		var PlayerOne = 'X';
- 		var PlayerTwo = 'O';
- 		currentTurn = PlayerOne;
+ 		// Save the game 
+ 		var gameState = {
+ 			PlayerOne: "X",
+ 			PlayerTwo: "O",
+ 			currentTurn: "X",
+ 			board: [
+"","","","","","","","",""
+ 			]
+ 		}
+       function render(state){
+        	document.querySelector(".render-target").innerHTML = "<div class='board'>" +"<div class='square' data-square-id='0'>" + state.board[0] + "</div>" +
+        	       "<div class='square' data-square-id='1'>" + state.board[1] + "</div>" +
+        	       "<div class='square' data-square-id='2'>" + state.board[2] + "</div>" +
+        	       "<div class='square' data-square-id='3'>" + state.board[3] + "</div>" +
+        	       "<div class='square' data-square-id='4'>" + state.board[4] + "</div>" +
+        	       "<div class='square' data-square-id='5'>" + state.board[5] + "</div>" +
+        	       "<div class='square' data-square-id='6'>" + state.board[6] + "</div>" +
+        	       "<div class='square' data-square-id='7'>" + state.board[7] + "</div>" + 
+        	       "<div class='square' data-square-id='8'>" + state.board[8] + "</div>" +
+        	       "</div>"
+        	       return
+        }
+        render(gameState)
+       // document.querySelector('.render-target').innerHTML = render(//gameState)
+//
+ 		// var PlayerOne = 'X';
+ 		// var PlayerTwo = 'O';
+ 		// currentTurn = PlayerOne;
          
         var board = document.querySelector('.board')
  		board.addEventListener('click', function(e){
- 			e.target.innerHTML = currentTurn;
+ 			var squareIndex = parseInt(e.target.dataset['squareId'],10)
+ 			gameState.board[squareIndex] = gameState.currentTurn
+ 			//e.target.innerHTML = currentTurn;
  			// Player switch
- 			currentTurn = currentTurn === PlayerOne ? PlayerTwo : PlayerOne;
- 			if (checkWinner()) {
- 				alert("Won!")
- 			}
+ 			gameState.currentTurn = gameState.currentTurn === gameState.PlayerOne ? gameState.PlayerTwo : gameState.PlayerOne;
+ 			render(gameState)
+ 		//if (checkWinner()) {
+ 		//	alert("Won!")
+ 		//}
  		})
-        
-        // Transform the squares into a 1x9 array
+    //    
+    //    // Transform the squares into a 1x9 array
  		function checkWinner(){
- 			var squares = Array.prototype.slice.call(document.querySelectorAll('.square'),0)
+ 			//var squares = Array.prototype.slice.call(document.querySelectorAll('.square'),0)
+ 			var squares =gameState.board
  			var symbols = squares.map(function(square){
  				return square.innerHTML
  			})
@@ -76,7 +105,7 @@
  					{return symbols[combo[0]]}
  				else { return false}
  			})
- 			console.log(symbols);
+ 	//		console.log(symbols);
  		}
  		</script>
  	</body>
