@@ -18,13 +18,15 @@ class App extends Component {
   
 
 handleClick(index) {
+  //Check whether there is already X or O. If there is already sth. don't overwrite it. 
+  if(this.state.board[index] === ""){
   this.state.board[index] = this.state.currentTurn
   this.setState({
     board: this.state.board,
     currentTurn: this.state.currentTurn === this.state.PlayerOne ? this.state.PlayerTwo : this.state.PlayerOne,
   })
   console.log(index);
-}
+}}
 
   render() {
     return (
